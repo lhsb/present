@@ -1,0 +1,67 @@
+---
+title       : Mining Twitter for Sentiment Analysis
+subtitle    : Coursera, bigdata, rstats
+author      : Lukas Horak
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [mathjax, quiz, bootstrap]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+---
+
+## Introduction
+
+* __Inspired by:__ Information Research and Analysis (IRA) Lab
+ * __Web:__ http://txcdk.unt.edu/iralab/sentiment_analysis
+* __Goal:__ Roughly explore positive/negative tweet's sentiment for three hashtags
+
+![alt text](https://dl.dropboxusercontent.com/u/198110768/emo.png) | ![alt text](https://dl.dropboxusercontent.com/u/198110768/emo1.png)
+----------------------------|------------------------
+
+---
+
+## Code - Check Packages, Get Data, Create Chart
+```{r, eval=F}
+list.of.packages <- c("ggplot2", "RCurl")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+library(ggplot2)
+library(RCurl)
+
+url <- getURL("https://dl.dropboxusercontent.com/u/198110768/all_scores.csv")
+all.scores <- read.csv(text = url)
+
+ggplot(data=all.scores) + # ggplot works on data.frames, always
+  geom_bar(mapping=aes(x=score, fill=Hashtag), binwidth=1) +
+  facet_grid(Hashtag~.) + # make a separate plot for each hashtag
+  theme_bw() + scale_fill_brewer() # plain display, nicer colors
+```
+
+
+---
+
+## Compare Three Hashtags
+![alt text](https://dl.dropboxusercontent.com/u/198110768/world.png)
+
+
+--- &radio
+
+## Quiz
+
+How many tweets were approximately analysed per one hashtag?
+
+1. `0 - 49`
+2. _`50 - 499`_
+3. `500 - 4999`
+4. `5000 - 49999`
+
+*** .hint
+
+No big samples...
+
+*** .explanation
+
+I was limited by the API.
+
