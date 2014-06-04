@@ -46,7 +46,7 @@ ggplot(data=all.scores) + # ggplot works on data.frames, always
 
 ---
 
-## Compare Three Hashtags
+## Compare Score of Sentiment
 ![alt text](https://dl.dropboxusercontent.com/u/198110768/world.png)
 
 
